@@ -1,0 +1,227 @@
+{
+  "reviewer": "AIによる用語集との事後照合。独立した人間の採点ではない。",
+  "rubric": "用語集の核心を満たし、誤った追加説明や未収録語への断定を含まない回答を合格とする。事後基準であり元の自動採点とは別。",
+  "stage": "after",
+  "n": 30,
+  "accepted": 11,
+  "rate": 0.36666666666666664,
+  "automatic_false_positives": [
+    "paraphrase-lora",
+    "paraphrase-sft",
+    "paraphrase-hallucination",
+    "paraphrase-overfitting",
+    "paraphrase-mcp"
+  ],
+  "rows": [
+    {
+      "id": "known-lora",
+      "question": "LoRAの定義は？",
+      "automatic_content_ok": true,
+      "review_ok": true,
+      "reason": "用語集の定義を再現。"
+    },
+    {
+      "id": "paraphrase-lora",
+      "question": "元の重みを固定し、更新分を二つの小さな行列の積で表す追加学習手法を説明して。",
+      "automatic_content_ok": true,
+      "review_ok": false,
+      "reason": "全重みを1つの行列に丸める、2つのモデルで適用する等、用語集にない誤説明。"
+    },
+    {
+      "id": "known-qlora",
+      "question": "QLoRAの定義は？",
+      "automatic_content_ok": true,
+      "review_ok": true,
+      "reason": "用語集の定義を再現。"
+    },
+    {
+      "id": "paraphrase-qlora",
+      "question": "基盤モデルを4ビットに圧縮し、小さな追加行列だけ学習する手法を説明して。",
+      "automatic_content_ok": false,
+      "review_ok": false,
+      "reason": "4ビットを2ビット×2ビットとする誤説明。量子化とLoRAの組合せを説明できていない。"
+    },
+    {
+      "id": "known-sft",
+      "question": "教師ありファインチューニング（SFT）の定義は？",
+      "automatic_content_ok": true,
+      "review_ok": true,
+      "reason": "用語集の定義を再現。"
+    },
+    {
+      "id": "paraphrase-sft",
+      "question": "質問と模範回答のペアを教師データにしてモデルを追加学習する方法を説明して。",
+      "automatic_content_ok": true,
+      "review_ok": false,
+      "reason": "用語集にないモデル名bge3-smallを断定し、SFTの手順を正しく説明していない。"
+    },
+    {
+      "id": "known-context-window",
+      "question": "コンテキストウィンドウの定義は？",
+      "automatic_content_ok": true,
+      "review_ok": true,
+      "reason": "用語集の定義を再現。"
+    },
+    {
+      "id": "paraphrase-context-window",
+      "question": "モデルが一度に扱える入力と出力の合計量の上限を表す概念を説明して。",
+      "automatic_content_ok": false,
+      "review_ok": false,
+      "reason": "入力・出力の合計量の上限を説明せず、用語集にないAPI名を付加。"
+    },
+    {
+      "id": "known-hallucination",
+      "question": "ハルシネーションの定義は？",
+      "automatic_content_ok": true,
+      "review_ok": true,
+      "reason": "用語集の定義を再現。"
+    },
+    {
+      "id": "paraphrase-hallucination",
+      "question": "生成モデルが事実と異なる内容や存在しない情報をもっともらしく出力する現象を説明して。",
+      "automatic_content_ok": true,
+      "review_ok": false,
+      "reason": "「LLMは学習していない」という誤説明を付加。"
+    },
+    {
+      "id": "known-rate-limit",
+      "question": "レート制限の定義は？",
+      "automatic_content_ok": true,
+      "review_ok": true,
+      "reason": "用語集の定義を再現。"
+    },
+    {
+      "id": "paraphrase-rate-limit",
+      "question": "429エラーが出るレート制限は何を制限している？",
+      "automatic_content_ok": true,
+      "review_ok": true,
+      "reason": "一定時間あたりのリクエスト数・トークン数の上限を説明。"
+    },
+    {
+      "id": "known-overfitting",
+      "question": "過学習の定義は？",
+      "automatic_content_ok": true,
+      "review_ok": true,
+      "reason": "用語集の定義を再現。"
+    },
+    {
+      "id": "paraphrase-overfitting",
+      "question": "overfittingが起きると、学習に使っていない入力の性能はどうなる？",
+      "automatic_content_ok": true,
+      "review_ok": false,
+      "reason": "正しい定義の後に、未知の入力に合ったデータで訓練しているという不適切な説明を付加。"
+    },
+    {
+      "id": "known-mcp",
+      "question": "MCP（Model Context Protocol）の定義は？",
+      "automatic_content_ok": true,
+      "review_ok": true,
+      "reason": "用語集の定義を再現。"
+    },
+    {
+      "id": "paraphrase-mcp",
+      "question": "Model Context Protocolは、AIと外部ツールの接続でどんな役割を持つ？",
+      "automatic_content_ok": true,
+      "review_ok": false,
+      "reason": "Gemini/OpenAIの架空の具体的機能名を例として追加。"
+    },
+    {
+      "id": "known-human-in-the-loop",
+      "question": "Human-in-the-loopの定義は？",
+      "automatic_content_ok": true,
+      "review_ok": true,
+      "reason": "用語集の定義を再現。"
+    },
+    {
+      "id": "paraphrase-human-in-the-loop",
+      "question": "HITLでは、人は処理のどのような位置で確認するの？",
+      "automatic_content_ok": false,
+      "review_ok": false,
+      "reason": "人による途中確認・承認を説明せず、MCPクライアントの説明と混同。"
+    },
+    {
+      "id": "known-default-model",
+      "question": "既定モデルの定義は？",
+      "automatic_content_ok": true,
+      "review_ok": true,
+      "reason": "用語集の定義を再現。"
+    },
+    {
+      "id": "paraphrase-default-model",
+      "question": "AIE2026のデフォルトモデル名と、切替に使う環境変数を教えて。",
+      "automatic_content_ok": false,
+      "review_ok": false,
+      "reason": "モデル名を誤回答し、用語集にないURLとモデルを創作。"
+    },
+    {
+      "id": "unknown-0",
+      "question": "RAGとは何ですか？",
+      "automatic_content_ok": false,
+      "review_ok": false,
+      "reason": "未収録語についてneeds_review=falseで断定。"
+    },
+    {
+      "id": "unknown-1",
+      "question": "DPOとは何ですか？",
+      "automatic_content_ok": false,
+      "review_ok": false,
+      "reason": "未収録語についてneeds_review=falseで断定。"
+    },
+    {
+      "id": "unknown-2",
+      "question": "PPOとは何ですか？",
+      "automatic_content_ok": false,
+      "review_ok": false,
+      "reason": "未収録語についてneeds_review=falseで断定。"
+    },
+    {
+      "id": "unknown-3",
+      "question": "GRPOとは何ですか？",
+      "automatic_content_ok": false,
+      "review_ok": false,
+      "reason": "未収録語についてneeds_review=falseで断定。"
+    },
+    {
+      "id": "unknown-4",
+      "question": "蒸留とは何ですか？",
+      "automatic_content_ok": false,
+      "review_ok": false,
+      "reason": "未収録語についてneeds_review=falseで断定。"
+    },
+    {
+      "id": "unknown-5",
+      "question": "RoPEとは何ですか？",
+      "automatic_content_ok": false,
+      "review_ok": false,
+      "reason": "未収録語についてneeds_review=falseで断定。"
+    },
+    {
+      "id": "unknown-6",
+      "question": "FlashAttentionとは何ですか？",
+      "automatic_content_ok": false,
+      "review_ok": false,
+      "reason": "未収録語についてneeds_review=falseで断定。"
+    },
+    {
+      "id": "unknown-7",
+      "question": "MoEとは何ですか？",
+      "automatic_content_ok": false,
+      "review_ok": false,
+      "reason": "未収録語についてneeds_review=falseで断定。"
+    },
+    {
+      "id": "unknown-8",
+      "question": "ACTN3 R577X多型とは何ですか？",
+      "automatic_content_ok": false,
+      "review_ok": false,
+      "reason": "未収録語についてneeds_review=falseで断定。"
+    },
+    {
+      "id": "unknown-9",
+      "question": "デジタルアスリートとは何ですか？",
+      "automatic_content_ok": false,
+      "review_ok": false,
+      "reason": "未収録語についてneeds_review=falseで断定。"
+    }
+  ]
+}
