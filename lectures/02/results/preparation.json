@@ -1,0 +1,9 @@
+{
+  "terms": 58,
+  "train": 116,
+  "valid": 58,
+  "test": 30,
+  "source_commit": "fae899a409e2c99feee9d44a3789f936f5fc64ee",
+  "glossary_sha256": "36e93d3120923db7097f060b70e7c5828e6ee333b8dfb7cbefd9443ffda9a3fe",
+  "training_executed": false
+}

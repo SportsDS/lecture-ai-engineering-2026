@@ -1,0 +1,31 @@
+{
+  "checks": [
+    "before:全30問の採点・集計一致",
+    "after:全30問の採点・集計一致",
+    "retrieval:全30問の採点・集計一致",
+    "116/58/30件、質問文の分割重複なし",
+    "未収録語10/10でneeds_review=false",
+    "用語集スナップショットSHA-256がpreparation.jsonと一致"
+  ],
+  "source_zip_sha256": "a4f623dd6d54d55c446aec018ef33cf70bd12da8411784e5bcdcdacbef510632",
+  "files_sha256": {
+    "lectures/02/data/eval.jsonl": "03484ef3ad6888b49780bbcb842893bd26607db8848c5f5bb71987ecd40e9390",
+    "lectures/02/data/glossary_sft.jsonl": "a78618c596656705b25bb0b105293fc3cef3f7069f7c978f4f25b9cd05e55cbb",
+    "lectures/02/data/glossary_snapshot.json": "36e93d3120923db7097f060b70e7c5828e6ee333b8dfb7cbefd9443ffda9a3fe",
+    "lectures/02/data/train_messages.jsonl": "10d179aeacd84dbfbb750022a8766244854dc91e5ee5efd18903e168737fbb89",
+    "lectures/02/data/valid_messages.jsonl": "64c8415003d0e5410e5aa14a9d261554ba166b48afdad6ee9a540bde4d87f98f",
+    "lectures/02/results/eval_after.json": "4fddc4ac69faaa6d48d2e703f3c821b9a527f459fa30a31640fcde3ba4fb50bd",
+    "lectures/02/results/eval_before.json": "673b5ab268f66a4dcfa24c9de0bd50c0db77e2697af00caa3bc3010ffdb601ea",
+    "lectures/02/results/eval_retrieval.json": "4111a983dbc576a123b4a3a285d6e89c46b98f7ea316bf4f32770a0545177a18",
+    "lectures/02/results/experiment_executed.py": "1f20c73e3a3ba469d243935a6ef570bf532838d91c4411908a825e14a025335c",
+    "lectures/02/results/lengths.json": "a93ba9a83b71a825fe759a0aa6f29ce71fc02278f28933730377993bf3d352f9",
+    "lectures/02/results/preparation.json": "6fb3dfe97480e1a9c757992b0e57724e2cfe80cd3ef256b07a5c6fde63a5d3a6",
+    "lectures/02/results/result.json": "a1223068083fb8508053b4c182cece3e76bdcd142ba9af7bef60aa274a278803",
+    "lectures/02/results/semantic_review_after.json": "100ab3e9f91e3c3e6cf2724efb78828e4a319e96f76711e96e0636c6d9715067",
+    "scripts/lec02_experiment.py": "af4be651214c1c296d70c9da650836230387380c4fbfc32a997a7c0ddbdf1b48"
+  },
+  "caveats": [
+    "lengths.jsonのmax=2はトークン数として無効。return_dict=Falseで修正した再実行スクリプトを同梱。修正版GPU学習は再実行していない。",
+    "preparation.jsonのtraining_executed=falseは準備時点の値。実行済みを示すresult.jsonを最終記録とする。"
+  ]
+}
