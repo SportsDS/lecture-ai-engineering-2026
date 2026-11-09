@@ -1,0 +1,781 @@
+{
+  "model": "gemini-3.5-flash-lite",
+  "versions": {
+    "google-adk": "2.14.0",
+    "google-genai": "2.31.0",
+    "pydantic-ai-slim": "2.57.0"
+  },
+  "rows": [
+    {
+      "question": "AIE2026の講座で使う「lecNN-start タグ」とは何ですか？",
+      "pydantic": {
+        "output": "「lecNN-start タグ」とは、AIE2026の講座リポジトリにおいて、各回の演習開始時点のコードに付与されているGitタグ（例: `lec03-start`）のことです。\n\nこれを利用することで、前の回が完了していなくても、このタグから新しくブランチを作成すれば、その回の演習をスムーズに始められるようになっています。\n\n（関連回：第1回）",
+        "calls": [
+          {
+            "name": "search_glossary",
+            "args": {
+              "query": "lecNN-start タグ"
+            }
+          }
+        ],
+        "returns": [
+          {
+            "name": "search_glossary",
+            "result": "[{\"term\": \"lecNN-start タグ\", \"lecture\": 1, \"definition\": \"AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。\", \"related\": [\"branch\"]}]"
+          }
+        ],
+        "requests": 2
+      },
+      "adk": {
+        "output": "「lecNN-start タグ」とは、AIE2026の講座リポジトリにおいて、各回の演習開始時点のコードに付けられているGitタグ（例: `lec03-start`）のことです。\n\n前の回が終わっていなくても、このタグから新しくブランチを作成することで、いつでもその回の演習をスムーズに始められるようになっています。\n\n（関連回：第1回）",
+        "calls": [
+          {
+            "name": "search_glossary",
+            "args": {
+              "query": "lecNN-start タグ"
+            }
+          }
+        ],
+        "returns": [
+          {
+            "id": "call_18312963830980774863",
+            "name": "search_glossary",
+            "response": {
+              "result": "[{\"term\": \"lecNN-start タグ\", \"lecture\": 1, \"definition\": \"AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。\", \"related\": [\"branch\"]}]"
+            }
+          }
+        ],
+        "requests": null,
+        "events": [
+          {
+            "author": "glossary_agent",
+            "session_id": "3d3ccd0d-469c-45ff-8bcd-9a3b41dbea56",
+            "node_path": "glossary_agent@1",
+            "id": "3ef404b1-2bbe-459e-b5d0-e9ab27fefdca",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "content": {
+              "parts": [
+                {
+                  "functionCall": {
+                    "id": "call_18312963830980774863",
+                    "args": {
+                      "query": "lecNN-start タグ"
+                    },
+                    "name": "search_glossary"
+                  },
+                  "thoughtSignature": "EmAKXgFpFH0TpmI1vX9hvxx-7j28_aLRsrWwOujD66kBLCgKVNCTLTFawBZokiudFSIkFHFHrWmYHNVEqwVfPWSQSZxcTim8TySl0xq13YT21kuICzWaDcSITB8RURmX5tc="
+                }
+              ],
+              "role": "model"
+            },
+            "finishReason": "STOP",
+            "usageMetadata": {
+              "candidatesTokenCount": 22,
+              "promptTokenCount": 519,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 519
+                }
+              ],
+              "totalTokenCount": 541
+            },
+            "invocationId": "e-3cef57f1-0409-4467-994e-3ffb2cb1609d",
+            "nodeInfo": {
+              "path": "glossary_agent@1"
+            },
+            "longRunningToolIds": [],
+            "timestamp": 1794202829.6598823
+          },
+          {
+            "author": "glossary_agent",
+            "session_id": "3d3ccd0d-469c-45ff-8bcd-9a3b41dbea56",
+            "node_path": "glossary_agent@1",
+            "id": "fd2157de-615b-43ab-ae56-bf96fd2f2e9d",
+            "content": {
+              "parts": [
+                {
+                  "functionResponse": {
+                    "id": "call_18312963830980774863",
+                    "name": "search_glossary",
+                    "response": {
+                      "result": "[{\"term\": \"lecNN-start タグ\", \"lecture\": 1, \"definition\": \"AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。\", \"related\": [\"branch\"]}]"
+                    }
+                  }
+                }
+              ],
+              "role": "user"
+            },
+            "invocationId": "e-3cef57f1-0409-4467-994e-3ffb2cb1609d",
+            "nodeInfo": {
+              "path": "glossary_agent@1"
+            },
+            "timestamp": 1794202829.6627405
+          },
+          {
+            "author": "glossary_agent",
+            "session_id": "3d3ccd0d-469c-45ff-8bcd-9a3b41dbea56",
+            "node_path": "glossary_agent@1",
+            "id": "76909c4e-6f7b-490f-82b7-0d96152c4aa8",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "content": {
+              "parts": [
+                {
+                  "text": "「lecNN-start タグ」とは、AIE2026の講座リポジトリにおいて、各回の演習開始時点のコードに付けられているGitタグ（例: `lec03-start`）のことです。\n\n前の回が終わっていなくても、このタグから新しくブランチを作成することで、いつでもその回の演習をスムーズに始められるようになっています。\n\n（関連回：第1回）",
+                  "thoughtSignature": "EmAKXgFpFH0TwX5aWFU3CTX9prb_pNyLldNVwHAITQ8hik4Rcif6UmmP2MdvXH7J7ppPWDLoQge01VG3TGIEPu-tJBNSMlEOvwAW6EWC6PokdSr34Vm0cPckP8g5JRUq7RM="
+                }
+              ],
+              "role": "model"
+            },
+            "finishReason": "STOP",
+            "usageMetadata": {
+              "candidatesTokenCount": 89,
+              "promptTokenCount": 638,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 638
+                }
+              ],
+              "totalTokenCount": 727
+            },
+            "invocationId": "e-3cef57f1-0409-4467-994e-3ffb2cb1609d",
+            "nodeInfo": {
+              "path": "glossary_agent@1"
+            },
+            "timestamp": 1794202830.7398343
+          }
+        ]
+      }
+    },
+    {
+      "question": "LoRAとQLoRAの違いは？",
+      "pydantic": {
+        "output": "LoRAとQLoRAの違いは、ベースモデルの重みをそのまま使うか、量子化してメモリを節約するかにあります。\n\n* **LoRA**: 事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列（低ランク行列）の積で表し、その小さな行列だけを効率よく学習するPEFT手法です。\n* **QLoRA**: LoRAの仕組みをベースにしつつ、ベースモデルの重みを4ビットなどに量子化してメモリを大幅に節約した状態で学習を行う手法です。これにより、より大きなモデルを小さなGPUでも扱えるようになります。\n\n関係する回：第2回",
+        "calls": [
+          {
+            "name": "search_glossary",
+            "args": {
+              "query": "LoRA"
+            }
+          },
+          {
+            "name": "search_glossary",
+            "args": {
+              "query": "QLoRA"
+            }
+          }
+        ],
+        "returns": [
+          {
+            "name": "search_glossary",
+            "result": "[{\"term\": \"LoRA\", \"lecture\": 2, \"definition\": \"事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\", \"related\": [\"peft\", \"lora-rank\", \"qlora\"]}, {\"term\": \"ランク（LoRAのr）\", \"lecture\": 2, \"definition\": \"LoRAで使う低ランク行列の大きさを決めるハイパーパラメータ。大きいほど表現力が上がるが、学習するパラメータとメモリも増える。\", \"related\": [\"lora\"]}, {\"term\": \"QLoRA\", \"lecture\": 2, \"definition\": \"ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。\", \"related\": [\"lora\", \"quantization\"]}]"
+          },
+          {
+            "name": "search_glossary",
+            "result": "[{\"term\": \"QLoRA\", \"lecture\": 2, \"definition\": \"ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。\", \"related\": [\"lora\", \"quantization\"]}, {\"term\": \"LoRA\", \"lecture\": 2, \"definition\": \"事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\", \"related\": [\"peft\", \"lora-rank\", \"qlora\"]}]"
+          }
+        ],
+        "requests": 2
+      },
+      "adk": {
+        "output": "LoRAとQLoRAの違いは以下の通りです。\n\n* **LoRA**: 事前学習済みの重みを固定し、重みの更新分を2つの小さな低ランク行列の積で表すことで、学習するパラメータ数を減らして効率的に微調整（PEFT）する手法です。\n* **QLoRA**: LoRAの仕組みに加え、ベースモデルの重みを4ビットなどに量子化（圧縮）してメモリ消費を大幅に抑えながら学習する手法です。これにより、より大きなモデルを比較的小さなGPUメモリでも扱えるようになります。\n\n第2回",
+        "calls": [
+          {
+            "name": "search_glossary",
+            "args": {
+              "query": "LoRA"
+            }
+          },
+          {
+            "name": "search_glossary",
+            "args": {
+              "query": "QLoRA"
+            }
+          }
+        ],
+        "returns": [
+          {
+            "id": "call_8013274030782063244",
+            "name": "search_glossary",
+            "response": {
+              "result": "[{\"term\": \"LoRA\", \"lecture\": 2, \"definition\": \"事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\", \"related\": [\"peft\", \"lora-rank\", \"qlora\"]}, {\"term\": \"ランク（LoRAのr）\", \"lecture\": 2, \"definition\": \"LoRAで使う低ランク行列の大きさを決めるハイパーパラメータ。大きいほど表現力が上がるが、学習するパラメータとメモリも増える。\", \"related\": [\"lora\"]}, {\"term\": \"QLoRA\", \"lecture\": 2, \"definition\": \"ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。\", \"related\": [\"lora\", \"quantization\"]}]"
+            }
+          },
+          {
+            "id": "call_8013274030782063327",
+            "name": "search_glossary",
+            "response": {
+              "result": "[{\"term\": \"QLoRA\", \"lecture\": 2, \"definition\": \"ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。\", \"related\": [\"lora\", \"quantization\"]}, {\"term\": \"LoRA\", \"lecture\": 2, \"definition\": \"事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\", \"related\": [\"peft\", \"lora-rank\", \"qlora\"]}]"
+            }
+          }
+        ],
+        "requests": null,
+        "events": [
+          {
+            "author": "glossary_agent",
+            "session_id": "87a723f1-f660-4486-abab-5237e261ccd7",
+            "node_path": "glossary_agent@1",
+            "id": "b54959d3-f602-48e6-bcc9-f33215511a2e",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "content": {
+              "parts": [
+                {
+                  "functionCall": {
+                    "id": "call_8013274030782063244",
+                    "args": {
+                      "query": "LoRA"
+                    },
+                    "name": "search_glossary"
+                  },
+                  "thoughtSignature": "EmAKXgFpFH0T01EfzJxK0DNYmK8RzEpzj0K5FGbPvsZfylKpb7i3NJg724W6HA6DQFqt57Dx5nu9_e-YGBVhrAAGQUbpOqXr58YnkXzg4tRIiJfLNJu9tfhwGeN4a3XtCsM="
+                },
+                {
+                  "functionCall": {
+                    "id": "call_8013274030782063327",
+                    "args": {
+                      "query": "QLoRA"
+                    },
+                    "name": "search_glossary"
+                  }
+                }
+              ],
+              "role": "model"
+            },
+            "finishReason": "STOP",
+            "usageMetadata": {
+              "candidatesTokenCount": 37,
+              "promptTokenCount": 506,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 506
+                }
+              ],
+              "totalTokenCount": 543
+            },
+            "invocationId": "e-48fb33c0-7351-41ea-ae2d-1f8110769cf7",
+            "nodeInfo": {
+              "path": "glossary_agent@1"
+            },
+            "longRunningToolIds": [],
+            "timestamp": 1794202855.6616163
+          },
+          {
+            "author": "glossary_agent",
+            "session_id": "87a723f1-f660-4486-abab-5237e261ccd7",
+            "node_path": "glossary_agent@1",
+            "id": "31d5d7e4-f3d6-40c3-b23a-65c23ea37d40",
+            "content": {
+              "parts": [
+                {
+                  "functionResponse": {
+                    "id": "call_8013274030782063244",
+                    "name": "search_glossary",
+                    "response": {
+                      "result": "[{\"term\": \"LoRA\", \"lecture\": 2, \"definition\": \"事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\", \"related\": [\"peft\", \"lora-rank\", \"qlora\"]}, {\"term\": \"ランク（LoRAのr）\", \"lecture\": 2, \"definition\": \"LoRAで使う低ランク行列の大きさを決めるハイパーパラメータ。大きいほど表現力が上がるが、学習するパラメータとメモリも増える。\", \"related\": [\"lora\"]}, {\"term\": \"QLoRA\", \"lecture\": 2, \"definition\": \"ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。\", \"related\": [\"lora\", \"quantization\"]}]"
+                    }
+                  }
+                },
+                {
+                  "functionResponse": {
+                    "id": "call_8013274030782063327",
+                    "name": "search_glossary",
+                    "response": {
+                      "result": "[{\"term\": \"QLoRA\", \"lecture\": 2, \"definition\": \"ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。\", \"related\": [\"lora\", \"quantization\"]}, {\"term\": \"LoRA\", \"lecture\": 2, \"definition\": \"事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\", \"related\": [\"peft\", \"lora-rank\", \"qlora\"]}]"
+                    }
+                  }
+                }
+              ],
+              "role": "user"
+            },
+            "invocationId": "e-48fb33c0-7351-41ea-ae2d-1f8110769cf7",
+            "nodeInfo": {
+              "path": "glossary_agent@1"
+            },
+            "timestamp": 1794202855.6645567
+          },
+          {
+            "author": "glossary_agent",
+            "session_id": "87a723f1-f660-4486-abab-5237e261ccd7",
+            "node_path": "glossary_agent@1",
+            "id": "997c8c18-3f47-4bd3-9753-6cb3075c6a8a",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "content": {
+              "parts": [
+                {
+                  "text": "LoRAとQLoRAの違いは以下の通りです。\n\n* **LoRA**: 事前学習済みの重みを固定し、重みの更新分を2つの小さな低ランク行列の積で表すことで、学習するパラメータ数を減らして効率的に微調整（PEFT）する手法です。\n* **QLoRA**: LoRAの仕組みに加え、ベースモデルの重みを4ビットなどに量子化（圧縮）してメモリ消費を大幅に抑えながら学習する手法です。これにより、より大きなモデルを比較的小さなGPUメモリでも扱えるようになります。\n\n第2回",
+                  "thoughtSignature": "EmAKXgFpFH0TD4WBg384b-THb4FuQD9VKZdeB_-vqavIF-0_wOd6j84A3HpBxPzzxBy779HmfYvEjIX__89mnFaWgFI8w07bTtOtc4_BpYBps7qxuwPZFDSss_9Q0YTnwno="
+                }
+              ],
+              "role": "model"
+            },
+            "finishReason": "STOP",
+            "usageMetadata": {
+              "candidatesTokenCount": 127,
+              "promptTokenCount": 1062,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 1062
+                }
+              ],
+              "totalTokenCount": 1189
+            },
+            "invocationId": "e-48fb33c0-7351-41ea-ae2d-1f8110769cf7",
+            "nodeInfo": {
+              "path": "glossary_agent@1"
+            },
+            "timestamp": 1794202856.944077
+          }
+        ]
+      }
+    },
+    {
+      "question": "第3回では何を学ぶ？",
+      "pydantic": {
+        "output": "第3回では「AIエージェント」をテーマに、以下の内容を学びます。\n\n- **AIエージェントの基本構造**：「モデル ＋ ループ ＋ ツール」の仕組みと、LLMが自律的にツールを呼び出すループの仕組み\n- **ツールとハーネス**：ツールを使った処理の仕組み、コストへの影響、PiやPydantic AI、ADKといったハーネス・フレームワークの活用\n- **安全性と制御**：ガードレールやHuman-in-the-loop（人の確認）の重要性\n\n演習では、実際に用語集を検索できるAIエージェントを作成し、動作を確かめたり新しいツールを追加したりする体験を行います。\n\n関連回：第3回",
+        "calls": [
+          {
+            "name": "get_lecture_summary",
+            "args": {
+              "lecture": 3
+            }
+          }
+        ],
+        "returns": [
+          {
+            "name": "get_lecture_summary",
+            "result": "# 第3回 AIエージェント\n\n## この回のねらい\n\n- AIエージェントの基本構造が「モデル＋ループ＋ツール」であることを理解する\n- Pydantic AIで、ツールを使う学習支援エージェントを自分で作り、動かす\n\n## 要点\n\n1. **エージェントとは**：LLMがツールを呼び出し、結果を見て次の行動を決めるループで目的を達成するシステム。\n2. **ツール**：モデルはツールの名前・説明文・引数の型を見て呼び出しを依頼し、実行はプログラム側が行う。説明文の書き方で挙動が変わる。\n3. **エージェントループのコスト**：1つの質問でLLMを複数回呼ぶため、応答時間・料金・レート制限への影響が大きい。\n4. **ハーネス**：Claude CodeやPiのような、ループ・ツール・UIでLLMを包むプログラム。Piは組み込みツールを4つ（read・write・edit・bash）に絞った薄いハーネス。\n5. **フレームワーク**：Pydantic AI（本線）は型でツールや出力を定義でき、テスト用モデル（TestModel）でAPIを呼ばずに動作確認できる。ADKはGoogleのフレームワークで、adk web で動きを画面で追える。\n6. **ガードレールとHuman-in-the-loop**：書き込みなど取り消しにくい操作は、権限を絞ったり、人の確認を挟んだりする。\n\n## 演習で体験すること\n\n- 第1回と同じ質問を、用語集を検索できるエージェントに投げ、回答が改善することを確かめる\n- どのツールがどの引数で呼ばれたかを読む\n- ツールを1つ追加する\n\n## 関連用語\n\nAIエージェント / エージェントループ / ツール / ツールの説明文 / 構造化出力 / ハーネス / Pi / Pydantic AI / ADK / MCP / ガードレール / Human-in-the-loop / TestModel\n"
+          }
+        ],
+        "requests": 2
+      },
+      "adk": {
+        "output": "第3回「AIエージェント」では、以下の内容を学びます。\n\n- **AIエージェントの基本構造**：「モデル＋ループ＋ツール」の仕組みを理解し、Pydantic AIを使ってツールを使う学習支援エージェントを作り動かす。\n- **主な要点**：\n  - エージェントの定義とツール呼び出しの仕組み\n  - エージェントループのコスト（応答時間や料金への影響）\n  - ハーネス（Claude CodeやPiなど）やフレームワーク（Pydantic AI、ADK）の活用\n  - ガードレールとHuman-in-the-loop（人の確認を挟む仕組み）\n\n第3回",
+        "calls": [
+          {
+            "name": "get_lecture_summary",
+            "args": {
+              "lecture": 3
+            }
+          }
+        ],
+        "returns": [
+          {
+            "id": "call_15566454058586033546",
+            "name": "get_lecture_summary",
+            "response": {
+              "result": "# 第3回 AIエージェント\n\n## この回のねらい\n\n- AIエージェントの基本構造が「モデル＋ループ＋ツール」であることを理解する\n- Pydantic AIで、ツールを使う学習支援エージェントを自分で作り、動かす\n\n## 要点\n\n1. **エージェントとは**：LLMがツールを呼び出し、結果を見て次の行動を決めるループで目的を達成するシステム。\n2. **ツール**：モデルはツールの名前・説明文・引数の型を見て呼び出しを依頼し、実行はプログラム側が行う。説明文の書き方で挙動が変わる。\n3. **エージェントループのコスト**：1つの質問でLLMを複数回呼ぶため、応答時間・料金・レート制限への影響が大きい。\n4. **ハーネス**：Claude CodeやPiのような、ループ・ツール・UIでLLMを包むプログラム。Piは組み込みツールを4つ（read・write・edit・bash）に絞った薄いハーネス。\n5. **フレームワーク**：Pydantic AI（本線）は型でツールや出力を定義でき、テスト用モデル（TestModel）でAPIを呼ばずに動作確認できる。ADKはGoogleのフレームワークで、adk web で動きを画面で追える。\n6. **ガードレールとHuman-in-the-loop**：書き込みなど取り消しにくい操作は、権限を絞ったり、人の確認を挟んだりする。\n\n## 演習で体験すること\n\n- 第1回と同じ質問を、用語集を検索できるエージェントに投げ、回答が改善することを確かめる\n- どのツールがどの引数で呼ばれたかを読む\n- ツールを1つ追加する\n\n## 関連用語\n\nAIエージェント / エージェントループ / ツール / ツールの説明文 / 構造化出力 / ハーネス / Pi / Pydantic AI / ADK / MCP / ガードレール / Human-in-the-loop / TestModel\n"
+            }
+          }
+        ],
+        "requests": null,
+        "events": [
+          {
+            "author": "glossary_agent",
+            "session_id": "a4383957-b1f3-4e3b-83cb-05650241849a",
+            "node_path": "glossary_agent@1",
+            "id": "6ddaee78-6244-4724-b92c-9c9f9e97e50c",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "content": {
+              "parts": [
+                {
+                  "functionCall": {
+                    "id": "call_15566454058586033546",
+                    "args": {
+                      "lecture": 3
+                    },
+                    "name": "get_lecture_summary"
+                  },
+                  "thoughtSignature": "EmAKXgFpFH0TQNRCiHYQ0HWPXSX_oZQQDBHk5E9g5Y7Y4_pJZlUB7j1xH9_8-wiRYwCM-SW9XlHECravZbNh93YFWcyq0r19KMELtDZg82QpRiAvMBw_ef9ai9fWZ41GXJ8="
+                }
+              ],
+              "role": "model"
+            },
+            "finishReason": "STOP",
+            "usageMetadata": {
+              "candidatesTokenCount": 16,
+              "promptTokenCount": 504,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 504
+                }
+              ],
+              "totalTokenCount": 520
+            },
+            "invocationId": "e-67b9e1f8-e69a-46e5-89ac-8afc3617121d",
+            "nodeInfo": {
+              "path": "glossary_agent@1"
+            },
+            "longRunningToolIds": [],
+            "timestamp": 1794202881.8153396
+          },
+          {
+            "author": "glossary_agent",
+            "session_id": "a4383957-b1f3-4e3b-83cb-05650241849a",
+            "node_path": "glossary_agent@1",
+            "id": "9fbb813a-8c96-4775-9a90-28b3f3a44dae",
+            "content": {
+              "parts": [
+                {
+                  "functionResponse": {
+                    "id": "call_15566454058586033546",
+                    "name": "get_lecture_summary",
+                    "response": {
+                      "result": "# 第3回 AIエージェント\n\n## この回のねらい\n\n- AIエージェントの基本構造が「モデル＋ループ＋ツール」であることを理解する\n- Pydantic AIで、ツールを使う学習支援エージェントを自分で作り、動かす\n\n## 要点\n\n1. **エージェントとは**：LLMがツールを呼び出し、結果を見て次の行動を決めるループで目的を達成するシステム。\n2. **ツール**：モデルはツールの名前・説明文・引数の型を見て呼び出しを依頼し、実行はプログラム側が行う。説明文の書き方で挙動が変わる。\n3. **エージェントループのコスト**：1つの質問でLLMを複数回呼ぶため、応答時間・料金・レート制限への影響が大きい。\n4. **ハーネス**：Claude CodeやPiのような、ループ・ツール・UIでLLMを包むプログラム。Piは組み込みツールを4つ（read・write・edit・bash）に絞った薄いハーネス。\n5. **フレームワーク**：Pydantic AI（本線）は型でツールや出力を定義でき、テスト用モデル（TestModel）でAPIを呼ばずに動作確認できる。ADKはGoogleのフレームワークで、adk web で動きを画面で追える。\n6. **ガードレールとHuman-in-the-loop**：書き込みなど取り消しにくい操作は、権限を絞ったり、人の確認を挟んだりする。\n\n## 演習で体験すること\n\n- 第1回と同じ質問を、用語集を検索できるエージェントに投げ、回答が改善することを確かめる\n- どのツールがどの引数で呼ばれたかを読む\n- ツールを1つ追加する\n\n## 関連用語\n\nAIエージェント / エージェントループ / ツール / ツールの説明文 / 構造化出力 / ハーネス / Pi / Pydantic AI / ADK / MCP / ガードレール / Human-in-the-loop / TestModel\n"
+                    }
+                  }
+                }
+              ],
+              "role": "user"
+            },
+            "invocationId": "e-67b9e1f8-e69a-46e5-89ac-8afc3617121d",
+            "nodeInfo": {
+              "path": "glossary_agent@1"
+            },
+            "timestamp": 1794202881.8174314
+          },
+          {
+            "author": "glossary_agent",
+            "session_id": "a4383957-b1f3-4e3b-83cb-05650241849a",
+            "node_path": "glossary_agent@1",
+            "id": "bc09f905-3fab-428e-9e9e-4fe83b418db9",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "content": {
+              "parts": [
+                {
+                  "text": "第3回「AIエージェント」では、以下の内容を学びます。\n\n- **AIエージェントの基本構造**：「モデル＋ループ＋ツール」の仕組みを理解し、Pydantic AIを使ってツールを使う学習支援エージェントを作り動かす。\n- **主な要点**：\n  - エージェントの定義とツール呼び出しの仕組み\n  - エージェントループのコスト（応答時間や料金への影響）\n  - ハーネス（Claude CodeやPiなど）やフレームワーク（Pydantic AI、ADK）の活用\n  - ガードレールとHuman-in-the-loop（人の確認を挟む仕組み）\n\n第3回",
+                  "thoughtSignature": "EmAKXgFpFH0TZR7QmsUyptnBFTqNheDJ5HfH-x4IjtzEn15I7RrjXtyh9Ikw1L6Q83nGXdYr8HxgBG_upPgDWsqdE6Zznd6nVRLox9JDrqjQwpYjxQWTS2z0i65D1NwcOic="
+                }
+              ],
+              "role": "model"
+            },
+            "finishReason": "STOP",
+            "usageMetadata": {
+              "candidatesTokenCount": 149,
+              "promptTokenCount": 977,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 977
+                }
+              ],
+              "totalTokenCount": 1126
+            },
+            "invocationId": "e-67b9e1f8-e69a-46e5-89ac-8afc3617121d",
+            "nodeInfo": {
+              "path": "glossary_agent@1"
+            },
+            "timestamp": 1794202882.9012659
+          }
+        ]
+      }
+    },
+    {
+      "question": "用語「AIE未登録検証語98765」の意味は？",
+      "pydantic": {
+        "output": "用語集には「AIE未登録検証語98765」という用語は見つかりませんでした。",
+        "calls": [
+          {
+            "name": "search_glossary",
+            "args": {
+              "query": "AIE未登録検証語98765"
+            }
+          }
+        ],
+        "returns": [
+          {
+            "name": "search_glossary",
+            "result": "用語集に「AIE未登録検証語98765」は見つかりませんでした。"
+          }
+        ],
+        "requests": 2
+      },
+      "adk": {
+        "output": "用語集には「AIE未登録検証語98765」という用語は見つかりませんでした。",
+        "calls": [
+          {
+            "name": "search_glossary",
+            "args": {
+              "query": "AIE未登録検証語98765"
+            }
+          }
+        ],
+        "returns": [
+          {
+            "id": "call_891100148110802896",
+            "name": "search_glossary",
+            "response": {
+              "result": "用語集に「AIE未登録検証語98765」は見つかりませんでした。"
+            }
+          }
+        ],
+        "requests": null,
+        "events": [
+          {
+            "author": "glossary_agent",
+            "session_id": "112a5ac5-a83a-4ae5-89d1-544f34eb51ee",
+            "node_path": "glossary_agent@1",
+            "id": "1ae74356-b5e6-4d57-9366-7ac057ab428e",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "content": {
+              "parts": [
+                {
+                  "functionCall": {
+                    "id": "call_891100148110802896",
+                    "args": {
+                      "query": "AIE未登録検証語98765"
+                    },
+                    "name": "search_glossary"
+                  },
+                  "thoughtSignature": "EmAKXgFpFH0TfWvKBC2ReAsjw52rrsdXUb32R0NSca150BS1s_M2pOq9hR8ZcAq3no08ly0ARQHP_CnPmHpgvl7DOXOJevS6VkqwkzOpj1-we8FGBrtw1pRu39niaaeP81o="
+                }
+              ],
+              "role": "model"
+            },
+            "finishReason": "STOP",
+            "usageMetadata": {
+              "candidatesTokenCount": 27,
+              "promptTokenCount": 514,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 514
+                }
+              ],
+              "totalTokenCount": 541
+            },
+            "invocationId": "e-187f737a-3058-4a07-b3ac-d94878daa6cb",
+            "nodeInfo": {
+              "path": "glossary_agent@1"
+            },
+            "longRunningToolIds": [],
+            "timestamp": 1794202906.5698154
+          },
+          {
+            "author": "glossary_agent",
+            "session_id": "112a5ac5-a83a-4ae5-89d1-544f34eb51ee",
+            "node_path": "glossary_agent@1",
+            "id": "8b09c6b9-ec0b-48d8-b7d9-7d8bfb326a45",
+            "content": {
+              "parts": [
+                {
+                  "functionResponse": {
+                    "id": "call_891100148110802896",
+                    "name": "search_glossary",
+                    "response": {
+                      "result": "用語集に「AIE未登録検証語98765」は見つかりませんでした。"
+                    }
+                  }
+                }
+              ],
+              "role": "user"
+            },
+            "invocationId": "e-187f737a-3058-4a07-b3ac-d94878daa6cb",
+            "nodeInfo": {
+              "path": "glossary_agent@1"
+            },
+            "timestamp": 1794202906.5725963
+          },
+          {
+            "author": "glossary_agent",
+            "session_id": "112a5ac5-a83a-4ae5-89d1-544f34eb51ee",
+            "node_path": "glossary_agent@1",
+            "id": "52d718bd-326e-49d1-8a07-d405ab9af908",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "content": {
+              "parts": [
+                {
+                  "text": "用語集には「AIE未登録検証語98765」という用語は見つかりませんでした。",
+                  "thoughtSignature": "EmAKXgFpFH0TcReG8EjHQAq4jAetn5cMlrR0d5fJVOkPiFZk5GcYcgx_yLsTl_ppm1BlwqumclZCOKKPnVrbdveoc3bNyhjc6V19hhgw1G_ds-ZLc7fT4CAoopppz80wXEc="
+                }
+              ],
+              "role": "model"
+            },
+            "finishReason": "STOP",
+            "usageMetadata": {
+              "candidatesTokenCount": 23,
+              "promptTokenCount": 576,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 576
+                }
+              ],
+              "totalTokenCount": 599
+            },
+            "invocationId": "e-187f737a-3058-4a07-b3ac-d94878daa6cb",
+            "nodeInfo": {
+              "path": "glossary_agent@1"
+            },
+            "timestamp": 1794202907.4685457
+          }
+        ]
+      }
+    },
+    {
+      "question": "第2回の内容から確認問題を1問出して",
+      "pydantic": {
+        "output": "第2回（ファインチューニングとLoRA）の内容から確認問題を出題します。\n\n**【確認問題】**\n「事前学習」とはどのようなプロセスですか？講座の用語集の定義に沿って説明してください。\n\n---\n\n**【模範解答のヒント】**\n大量のテキストを使って、モデルに何をさせる（予測する）工程なのかを思い出すとスムーズに答えられますよ。\n\n（関連回：第2回）",
+        "calls": [
+          {
+            "name": "get_lecture_summary",
+            "args": {
+              "lecture": 2
+            }
+          },
+          {
+            "name": "search_glossary",
+            "args": {
+              "query": "LoRA"
+            }
+          },
+          {
+            "name": "make_quiz",
+            "args": {
+              "lecture": 2
+            }
+          }
+        ],
+        "returns": [
+          {
+            "name": "get_lecture_summary",
+            "result": "# 第2回 ファインチューニングとLoRA\n\n## この回のねらい\n\n- 事前学習とファインチューニングの違い、ファインチューニングが向く場面と向かない場面を理解する\n- LoRAの考え方を理解し、Google Colab上で小さなモデルをLoRAで学習させる\n\n## 要点\n\n1. **事前学習とファインチューニング**：事前学習で汎用的な言語能力を身につけたモデルを、目的に合うデータで追加学習させるのがファインチューニング。\n2. **向く場面・向かない場面**：出力形式や口調、特定タスクの振る舞いを身につけさせるのに向く。新しい事実や頻繁に変わる情報は、ツールや外部データで参照させるほうが向くことが多い。\n3. **SFT**：入力と望ましい出力のペアで学習させる。データの質と形式が結果を大きく左右する。\n4. **PEFTとLoRA**：全パラメータを更新せず、小さな低ランク行列だけを学習する。必要なGPUメモリと保存容量を大きく減らせる。主なハイパーパラメータはランク r、学習率、エポック数。\n5. **QLoRAとの関係**：QLoRAはベースモデルの重みを4bitに量子化して保持し、その上でLoRAのアダプタだけを学習する方法。重みのメモリが減る一方、学習は速くならず、量子化の誤差で出力が変わることがある。演習ではモデルがT4に載るためLoRAで学習し、4bitで読み込んだときの違いは発展で確かめる。\n6. **過学習に注意**：学習に使わない検証データで性能を確かめる。\n\n## 演習で体験すること\n\n- Colab上で小さなモデル（Qwen3.5-0.8B）を架空FAQのデータでLoRA学習させ、JSON形式の遵守率と内容正解率を学習前後で比べる\n- 形式は学習で身につくが、FAQにない質問への判断（確認を求めるか断定するか）までは保証されないことを確かめる\n\n## 関連用語\n\n事前学習 / ファインチューニング / SFT / PEFT / LoRA / ランク / QLoRA / 量子化 / 学習率 / エポック / 過学習 / ハルシネーション\n"
+          },
+          {
+            "name": "search_glossary",
+            "result": "[{\"term\": \"LoRA\", \"lecture\": 2, \"definition\": \"事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\", \"related\": [\"peft\", \"lora-rank\", \"qlora\"]}, {\"term\": \"ランク（LoRAのr）\", \"lecture\": 2, \"definition\": \"LoRAで使う低ランク行列の大きさを決めるハイパーパラメータ。大きいほど表現力が上がるが、学習するパラメータとメモリも増える。\", \"related\": [\"lora\"]}, {\"term\": \"QLoRA\", \"lecture\": 2, \"definition\": \"ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。\", \"related\": [\"lora\", \"quantization\"]}]"
+          },
+          {
+            "name": "make_quiz",
+            "result": "{\"lecture\": 2, \"term\": \"事前学習\", \"question\": \"「事前学習」とは何ですか？\", \"answer\": \"大量の汎用テキストで、次のトークンを予測するようにモデルを学習させる最初の段階。言語の知識や一般的な常識の多くはここで身につく。\"}"
+          }
+        ],
+        "requests": 4
+      },
+      "adk": {
+        "output": "第2回の内容から、復習用の確認問題をお出しします！\n\n**【確認問題】**\n「事前学習」とは何ですか？\n\n（第2回）",
+        "calls": [
+          {
+            "name": "make_quiz",
+            "args": {
+              "lecture": 2
+            }
+          }
+        ],
+        "returns": [
+          {
+            "id": "call_295075687155936173",
+            "name": "make_quiz",
+            "response": {
+              "result": "{\"lecture\": 2, \"term\": \"事前学習\", \"question\": \"「事前学習」とは何ですか？\", \"answer\": \"大量の汎用テキストで、次のトークンを予測するようにモデルを学習させる最初の段階。言語の知識や一般的な常識の多くはここで身につく。\"}"
+            }
+          }
+        ],
+        "requests": null,
+        "events": [
+          {
+            "author": "glossary_agent",
+            "session_id": "1930cc18-3878-4db2-ac96-389f73bb1f31",
+            "node_path": "glossary_agent@1",
+            "id": "4026f7c9-e3a9-40db-8e78-ff0534f5576b",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "content": {
+              "parts": [
+                {
+                  "functionCall": {
+                    "id": "call_295075687155936173",
+                    "args": {
+                      "lecture": 2
+                    },
+                    "name": "make_quiz"
+                  },
+                  "thoughtSignature": "EmAKXgFpFH0TNgYwYTpla-AVOcF-W_cQPgKCVISNJqv1ljUvBSZx_ecJwLXMmE_4C5rz58zdBoC_CguzFG6j-wA5LiLGJrEsvf4CZYvczoPCzo6X2RXlTgJCngWcfxt9Mys="
+                }
+              ],
+              "role": "model"
+            },
+            "finishReason": "STOP",
+            "usageMetadata": {
+              "candidatesTokenCount": 14,
+              "promptTokenCount": 507,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 507
+                }
+              ],
+              "totalTokenCount": 521
+            },
+            "invocationId": "e-e3aaaeff-33c5-47c1-b19e-964bcae54f4d",
+            "nodeInfo": {
+              "path": "glossary_agent@1"
+            },
+            "longRunningToolIds": [],
+            "timestamp": 1794202933.8767734
+          },
+          {
+            "author": "glossary_agent",
+            "session_id": "1930cc18-3878-4db2-ac96-389f73bb1f31",
+            "node_path": "glossary_agent@1",
+            "id": "d24ad496-7416-407a-a7cb-89932b2653f9",
+            "content": {
+              "parts": [
+                {
+                  "functionResponse": {
+                    "id": "call_295075687155936173",
+                    "name": "make_quiz",
+                    "response": {
+                      "result": "{\"lecture\": 2, \"term\": \"事前学習\", \"question\": \"「事前学習」とは何ですか？\", \"answer\": \"大量の汎用テキストで、次のトークンを予測するようにモデルを学習させる最初の段階。言語の知識や一般的な常識の多くはここで身につく。\"}"
+                    }
+                  }
+                }
+              ],
+              "role": "user"
+            },
+            "invocationId": "e-e3aaaeff-33c5-47c1-b19e-964bcae54f4d",
+            "nodeInfo": {
+              "path": "glossary_agent@1"
+            },
+            "timestamp": 1794202933.8792598
+          },
+          {
+            "author": "glossary_agent",
+            "session_id": "1930cc18-3878-4db2-ac96-389f73bb1f31",
+            "node_path": "glossary_agent@1",
+            "id": "9b734a56-8cf1-4d53-99b5-698f8d77d776",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "content": {
+              "parts": [
+                {
+                  "text": "第2回の内容から、復習用の確認問題をお出しします！\n\n**【確認問題】**\n「事前学習」とは何ですか？\n\n（第2回）",
+                  "thoughtSignature": "EmAKXgFpFH0Tfns1SBZGYKZtPgwSmgfh4w3sAn49Y7t9DvZlTo9nadopAKM9IeMzZUhDjbBky2wCcyIcNvchyOYsiLA7Kaeuyv8tIC1IkgqPzYBcSkzIpQsCgM1T-vldZPA="
+                }
+              ],
+              "role": "model"
+            },
+            "finishReason": "STOP",
+            "usageMetadata": {
+              "candidatesTokenCount": 37,
+              "promptTokenCount": 600,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 600
+                }
+              ],
+              "totalTokenCount": 637
+            },
+            "invocationId": "e-e3aaaeff-33c5-47c1-b19e-964bcae54f4d",
+            "nodeInfo": {
+              "path": "glossary_agent@1"
+            },
+            "timestamp": 1794202935.170766
+          }
+        ]
+      }
+    }
+  ]
+}
