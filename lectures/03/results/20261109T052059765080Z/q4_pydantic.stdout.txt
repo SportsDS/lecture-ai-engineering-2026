@@ -1,0 +1,1 @@
+{"output": "申し訳ありません。用語集には「AIE未登録検証語98765」という用語は登録されていません。", "calls": [{"name": "search_glossary", "args": {"query": "AIE未登録検証語98765"}}], "returns": [{"name": "search_glossary", "result": "用語集に「AIE未登録検証語98765」は見つかりませんでした。"}], "requests": 2}
