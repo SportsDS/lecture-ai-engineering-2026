@@ -1,0 +1,15 @@
+API不要の静的・関数検証（実モデルの回答比較ではない）
+google-adk 2.14.0
+google-genai 2.31.0
+pydantic-ai-slim 2.57.0
+指示文字列の一致: PASS
+ツール関数オブジェクトの同一性: PASS (3関数)
+モデル名の一致: PASS gemini-3.5-flash-lite
+両SDKの必須引数・型: PASS search_glossary query string
+両SDKの必須引数・型: PASS get_lecture_summary lecture integer
+両SDKの必須引数・型: PASS make_quiz lecture integer
+search_glossary LoRA => [{"term": "LoRA", "lecture": 2, "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。", "related": ["peft", "lora-rank", "qlora"]}, {"term": "ランク（LoRAのr）", "lecture": 2, "definition": "LoRAで使う低ランク行列の大きさを決めるハイパーパラメータ。大きいほど表現力が上がるが、学習するパラメータとメモリも増える。", "related": ["lora"]}, {"term": "QLoRA", "lecture": 2, "definition": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。", "related": ["lora", "quantization"]}]
+search_glossary QLoRA => [{"term": "QLoRA", "lecture": 2, "definition": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。", "related": ["lora", "quantization"]}, {"term": "LoRA", "lecture": 2, "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。", "related": ["peft", "lora-rank", "qlora"]}]
+search_glossary AIE未登録検証語98765 => 用語集に「AIE未登録検証語98765」は見つかりませんでした。
+get_lecture_summary(3): PASS / # 第3回 AIエージェント
+TestModelは登録情報の確認だけに使用。生成したダミー回答は比較結果に使っていない。

@@ -1,0 +1,26 @@
+[model] gemini-3.5-flash-lite
+第2回「ファインチューニングとLoRA」から確認問題を出題します。
+
+**【問題】**
+「事前学習」とは、どのような学習段階のことですか？講座の用語集の定義に沿って説明してください。
+
+---
+
+**【模範解答のヒント】**
+大量のテキストデータを用いて、モデルに**「次のトークンを予測する」**タスクを学習させる、最初の段階のことです。言語の基礎的な知識や常識はこの段階で獲得されます。
+
+（第2回）
+
+--- trace ---
+[tool call]   get_lecture_summary({'lecture': 2})
+[tool return] get_lecture_summary -> # 第2回 ファインチューニングとLoRA
+
+## この回のねらい
+
+- 事前学習とファインチューニングの違い、ファインチューニングが向く場面と向かない場面を理解する
+- LoRAの考え方を理解し、Google Colab上で小さなモデルを…
+[tool call]   search_glossary({'query': 'LoRA'})
+[tool return] search_glossary -> [{"term": "LoRA", "lecture": 2, "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラ…
+[tool call]   make_quiz({'lecture': 2})
+[tool return] make_quiz -> {"lecture": 2, "term": "事前学習", "question": "「事前学習」とは何ですか？", "answer": "大量の汎用テキストで、次のトークンを予測するようにモデルを学習させる最初の段階。言語の知識や一般的…
+[usage] RunUsage(cost=Decimal('0.0016370'), details={'text_prompt_tokens': 4115}, input_text_tokens=4115, input_tokens=4115, output_tokens=161, requests=4, tool_calls=3)
