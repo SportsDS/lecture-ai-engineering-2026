@@ -16,16 +16,17 @@ print('API不要の静的・関数検証（実モデルの回答比較ではな�
 for name in ('google-adk', 'google-genai', 'pydantic-ai-slim'):
     print(name, importlib.metadata.version(name))
 assert root_agent.instruction == INSTRUCTIONS
-assert root_agent.tools == [tools.search_glossary, tools.get_lecture_summary]
+assert root_agent.tools == [tools.search_glossary, tools.get_lecture_summary, tools.make_quiz]
 assert root_agent.model == MODEL
 print('指示文字列の一致: PASS')
-print('ツール関数オブジェクトの同一性: PASS (2関数)')
+print('ツール関数オブジェクトの同一性: PASS (3関数)')
 print('モデル名の一致: PASS', MODEL)
 model = TestModel(call_tools=[])
 agent.run_sync('登録情報の確認', model=model)
 pydantic = {t.name: t for t in model.last_model_request_parameters.function_tools}
 for fn, argument, kind in ((tools.search_glossary, 'query', 'string'),
-                           (tools.get_lecture_summary, 'lecture', 'integer')):
+                           (tools.get_lecture_summary, 'lecture', 'integer'),
+                           (tools.make_quiz, 'lecture', 'integer')):
     adk = FunctionTool(fn)._get_declaration().model_dump(exclude_none=True)
     pa_schema = pydantic[fn.__name__].parameters_json_schema
     adk_schema = adk['parameters_json_schema']

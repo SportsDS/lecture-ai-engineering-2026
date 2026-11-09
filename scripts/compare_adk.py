@@ -14,6 +14,7 @@ import re
 import shutil
 import subprocess
 import sys
+import time
 from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,6 +23,7 @@ QUESTIONS = [
     'LoRAとQLoRAの違いは？',
     '第3回では何を学ぶ？',
     '用語「AIE未登録検証語98765」の意味は？',
+    '第2回の内容から確認問題を1問出して',
 ]
 START = '<!-- adk-comparison:start -->'
 END = '<!-- adk-comparison:end -->'
@@ -125,6 +127,7 @@ def render(rows: list[dict], model: str, versions: dict, stamp: str) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--worker', help=argparse.SUPPRESS)
+    parser.add_argument('--delay', type=float, default=15, help='質問間の待機秒数（既定15秒）')
     args = parser.parse_args()
     if args.worker is not None:
         pydantic_worker(args.worker)
@@ -150,6 +153,8 @@ def main() -> None:
         pydantic = json.loads(run([sys.executable, str(Path(__file__).resolve()), '--worker', question], env, output / f'q{i}_pydantic'))
         adk_result = parse_adk(run([adk, 'run', '--in_memory', '--jsonl', 'adk_agent/glossary_agent', question], env, output / f'q{i}_adk'))
         rows.append({'question': question, 'pydantic': pydantic, 'adk': adk_result})
+        if i < len(QUESTIONS):
+            time.sleep(max(0, args.delay))
     (output / 'comparison.json').write_text(json.dumps({'model': MODEL, 'versions': versions, 'rows': rows}, ensure_ascii=False, indent=2), encoding='utf-8')
     report = render(rows, MODEL, versions, stamp)
     (output / 'comparison.md').write_text(report, encoding='utf-8')
