@@ -2,56 +2,96 @@
 
 ## 演習
 
-今回の変更は宿題の発展(a)に限定した。演習の実モデル実行・`make_quiz` の追加はこの変更には含めていない。
+### 第1回（素のLLM）とエージェントの回答の違い
+
+第1回と同じ既定質問「AIE2026の講座の宿題にある『3レベル』とは何ですか？」を再実行した。また、第3回資料の質問「lecNN-start タグとは何ですか？」でも、素のLLM（`app.ask`）と用語集を検索できるエージェント（`app.agent`）を比較した。モデルは共通の `gemini-3.5-flash-lite`、各条件1回、新規プロセスで実行した。
+
+| 質問 | 素のLLMの実回答 | エージェントの実回答 |
+|---|---|---|
+| 宿題の3レベル | 基礎・応用・発展という一般的な区分を説明し、講座の提出条件は分からないため確認を勧めた。 | `search_glossary(query="3レベル")` を使い、基礎・実装・発展の区分と「どれか1つで完了」という講座固有の条件を説明した。 |
+| lecNN-start タグ | 講義資料中の開始マーカーやNeural Networkの区切りである可能性を推測した。講座の用語集の定義とは異なった。 | `search_glossary(query="lecNN-start タグ")` を使い、各回の演習開始時点のコードに付けたGitタグで、前の回が未完了でもそのタグから始められると説明した。 |
+
+今回の2問では、外部データを参照することで講座固有の情報に基づいて答えられた。ただし、モデル・指示・ツールの有無が異なる条件の比較であり、一般的な正答率の改善を測った実験ではない。
+実回答全文と実行条件は [演習ログ](results/exercise_20261109T053810574600Z/exercise.md)、機械可読の記録は [exercise.json](results/exercise_20261109T053810574600Z/exercise.json) に保存した。
+
+### `--trace` で見えたツール呼び出しとrequests
+
+| 質問 | ツール名と引数（記録上の順序） | ツール呼び出し件数 | LLM呼び出し回数（requests） |
+|---|---|---:|---:|
+| 開始タグ | `search_glossary(query="lecNN-start タグ")` | 1 | 2 |
+| 宿題の3レベル | `search_glossary(query="3レベル")` | 1 | 2 |
+| LoRAとQLoRAの違い | `search_glossary(query="LoRA")`、`search_glossary(query="QLoRA")` | 2 | 2 |
+| 第2回の確認問題 | `get_lecture_summary(lecture=2)` → `search_glossary(query="LoRA")` → `make_quiz(lecture=2)` | 3 | 4 |
+
+`requests` は1問を処理する際のLLM呼び出し回数であり、ツール件数ではない。LoRA・QLoRAでは2件のツール呼び出しがあってもrequestsは2回だった。確認問題ではツール結果を受け取って次のツールを呼ぶ流れが記録され、requestsは4回となった。
+
+生ログ：[LoRA・QLoRAのtrace](results/exercise_20261109T053810574600Z/agent_lora.stdout.txt)、[確認問題のtrace](results/exercise_20261109T053810574600Z/agent_quiz.stdout.txt)。
+
+### 追加したツールとdocstring
+
+`app/tools.py` に `make_quiz(lecture: int) -> str` を追加し、`app/agent.py` の `agent.tool_plain(tools.make_quiz)` で登録した。指定回の最初の用語を用い、講義回・用語・問題・用語集の定義に基づく模範解答をJSON文字列で返す。毎回同じ入力で同じ問題になるようにし、存在しない回や1未満などの不正入力は説明文を返す。
+
+docstringには「復習用の確認問題と模範解答を1問返す」「小テストや復習問題を求められたときに使う」「lectureは1始まりの整数」と記載した。モデルが用途と引数を判断できるようにするためである。
+
+実モデルでは `make_quiz(lecture=2)` が呼ばれ、「事前学習」を問う問題が生成された。ツールは模範解答も返し、エージェントの最終回答では問題と解答のヒントが提示された。
+
+### 検証
+
+- `uv run pytest -q` 相当の実行結果：**20 passed in 5.08s**（[Codespacesの実測ログ](results/exercise_20261109T053810574600Z/pytest.stdout.txt)）。
+- 追加テストでは、問題・解答が指定回の用語集と整合すること、不正入力・未登録回への応答、エージェントへの登録と戻り値の受け渡しを確認した。
+- 同じ指示・3つの関数・モデル名を両SDKで共有していること、必須引数と型の登録を確認した（[API不要の確認ログ](results/exercise_20261109T053810574600Z/offline.stdout.txt)）。
+- TestModelは登録・接続の検証にのみ使用し、ダミー回答を実モデルの結果として記載していない。
+- [Codespacesでの実行結果の確認画面](submission_check.jpg)も保存した。
 
 ## 宿題
 
-- 取り組んだレベル：**発展(a)：Google ADKへの移植**
-- やったこと：`adk_agent/glossary_agent/agent.py` と `__init__.py` を追加した。`app.agent.INSTRUCTIONS`、`app.tools.search_glossary`、`app.tools.get_lecture_summary` を直接インポートし、同じ指示と同じ関数をADKの `Agent` に渡した。モデルも `app.config.MODEL` を共有した。`app/` と講座の `pyproject.toml`・`uv.lock` は変更していない。
-- 結果：共通モデル `gemini-3.5-flash-lite` を使い、4問をPydantic AI版とADK版で実行した。4問すべてでツール名・引数・記録上の呼び出し順序が一致し、Pydantic AIのLLM呼び出し回数は各問2回だった。回答文には表現・要約対象・関連回の表示に違いがあった。実回答は末尾、生ログと構造化結果は [results/20261109T052059765080Z/](results/20261109T052059765080Z/) に保存した。
-- 気づき・疑問：指示文と検索関数を分離しておくと、エージェント構築部分の変更でフレームワークを置き換えられる。ただし、同じ関数・指示でもモデルに送るリクエストの構成や既定の生成設定まで同じとは限らない。回答差が出たとき、それがSDK・生成の確率的変動・会話履歴のどれに由来するかは、単発実行だけでは分離できない。
+- 取り組んだレベル：**発展(a)：同じエージェントをGoogle ADKで組み立て、書き方・実回答を比較する**
+- やったこと：演習で追加した `make_quiz` を含め、`search_glossary`・`get_lecture_summary`・`make_quiz` の3関数、`INSTRUCTIONS`、`MODEL` を直接インポートしてADKへ渡した。指示文や既存2関数の検索・要約処理は変更せず、ADK側ではエージェントの構築部分を実装した。`app/` の変更は演習のツール追加・登録に限り、`pyproject.toml` と `uv.lock` は変更していない。
+- 結果：同じ5問をPydantic AIと `adk run` で実行した。最初の4問はツール名・引数・記録上の順序が一致した。確認問題では、Pydantic AI版が講義要約→用語検索→問題生成の3ツールを呼び、ADK版は問題生成の1ツールだけを呼んだ。両方式とも第2回の「事前学習」を問う問題を出した。生ログと集約結果は [最新の発展比較ログ](results/20261109T054020489646Z/) に保存した。
+- 気づき・疑問：同じ指示と関数を共有していても、モデルが選ぶ呼び出しの経路や最終回答の提示方法は一致するとは限らない。今回の確認問題では呼び出し経路の差を観測できたが、単発の結果からフレームワークの優劣や差の原因は断定できない。
 
 ### 書き方の比較
 
-| 比較項目 | Pydantic AI（演習） | Google ADK（今回） |
+| 比較項目 | Pydantic AI | Google ADK |
 |---|---|---|
-| エージェント | `pydantic_ai.Agent` | `google.adk.agents.Agent` |
-| 指示の渡し方 | `Agent(instructions=INSTRUCTIONS)` | `Agent(instruction=INSTRUCTIONS, ...)` |
-| ツール登録 | `agent.tool_plain(tools.search_glossary)` など | `tools=[tools.search_glossary, tools.get_lecture_summary]` |
-| モデル指定 | 実行時に `GoogleModel` を渡す | 構築時に `model=MODEL` を渡す |
-| 通常の実行 | `uv run python -m app.agent --trace "質問"` | `PYTHONPATH=. uv run --with google-adk==2.14.0 adk run adk_agent/glossary_agent` |
-| 直接共有したもの | 元の指示文字列・Python関数 | 同じ文字列・同じ関数オブジェクト |
+| 指示 | `Agent(instructions=INSTRUCTIONS)` | `Agent(instruction=INSTRUCTIONS, ...)` |
+| ツール登録 | `agent.tool_plain(関数)` を3回呼ぶ | `tools=[3つの同じ関数]` を渡す |
+| モデル | 実行時に `GoogleModel` を渡す | 構築時に `model=MODEL` を渡す |
+| 実行 | `python -m app.agent --trace "質問"` | `adk run --in_memory --jsonl adk_agent/glossary_agent "質問"` |
 
-`instructions`（複数形）と `instruction`（単数形）が異なる。ツール名・docstring・型ヒントは関数の再利用により維持される。一方、SDKが生成するスキーマやモデルへの要求全体の完全一致は、このことだけでは保証できない。
+`instructions`（複数形）と `instruction`（単数形）が異なる。関数を再利用することで、名前・docstring・型ヒント・用語集へのアクセス処理は共通にできた。ただし、SDKが作る要求全体や既定生成設定まで同一とは限らない。
 
-### 検証と再現手順
+### 実測結果の解釈
 
-API不要の検証結果は [offline_verification.txt](offline_verification.txt) に記録する。
-この検証は指示・関数の共有、ツールの実出力、SDKへの登録を確かめるもので、実モデルの回答品質の評価ではない。
+1. **追加ツールで経路の差が観測された。** 確認問題の依頼で、Pydantic AI版は3ツール・requests=4、ADK版は `make_quiz(lecture=2)` の1ツールを呼んだ。ADKのイベント数をPydantic AIのrequestsと同じ指標として扱ってはいない。
+2. **同じ問題でも回答の出し方が異なった。** Pydantic AI版は模範解答のヒントを付け、ADK版は問題だけを提示した。ツールが返す模範解答を、最終回答に必ずそのまま載せるわけではなかった。
+3. **未登録語は両方式とも断定を避けた。** 両方が用語集に見つからない旨を返した。一方、今回の最終構成では両方とも関連回の表示を省略した。該当する回がない場合の表示を指示文で明示する余地がある。
+4. **指示文の適用関係に課題が残る。** 第3回の内容を聞く質問では、両方式とも講義要約だけを使い、用語集検索は行わなかった。ADKの確認問題でも用語検索はなかった。「講座固有のことには必ず用語検索」と「回の内容には講義要約」の適用関係をどう明確にするかが次の改善候補である。今回は共通の指示を維持する比較なので変更しなかった。
+5. **1回の観測の限界がある。** 各条件1回で、SDK既定の生成設定は同一化していない。呼び出しの安定性・一般的な正答率・所要時間・費用の優劣は評価していない。
 
-Gemini APIキーが登録済みのCodespacesで次を実行する。
+### 再現手順と実行記録
+
+APIキー設定済みのCodespacesのリポジトリ直下で実行する。
 
 ```bash
+uv run --with google-adk==2.14.0 python scripts/run_lecture03_exercise.py
 uv run --with google-adk==2.14.0 python scripts/compare_adk.py
 ```
 
-比較する質問は、演習と同じ開始タグの質問、LoRAとQLoRAの違い、第3回の内容、未登録語の4件。
-各条件を新規プロセスで実行する。Pydantic AIの結果・ツール名・引数・戻り値・requestsと、`adk run --jsonl` のイベント・実回答を `lectures/03/results/` に保存する。
-4件すべて成功した場合に限り、末尾の結果欄を更新する。レート制限・認証・タイムアウトなどの失敗時は、成功済み結果を上書きせず未完了で停止する。APIキーは保存しない。
-
-### 制約・AI利用
-
-- コード・提出文の作成とログの照合にはAIを利用した。実モデル比較はCodespacesで実行し、4問×2方式の回答を保存した。記載した結果は保存された実回答・ツール呼び出し記録に基づく。
-- 発展(a)は添付の宿題資料に従い `adk run` で比較する。リポジトリの `problem.md` には `adk web` の記載もあるが、今回は添付資料の手順を優先した。Web画面の観察結果は記載しない。
-- 本文の観察・解釈は実行ログに基づく。各条件1回の比較であり、一般的な回答品質や指示遵守率は評価していない。
+- 実測したコード：`73d2003ee8796b35ce8fb02e4b916ab92109b424`。以後の提出文整理ではエージェント・ツール・テストのコードを変更していない。
+- 演習開始：2026-11-09 14:38 JST。発展の再比較開始：2026-11-09 14:40 JST。
+- 初回の2ツール構成の4問比較（`results/20261109T052059765080Z/`）も履歴として保持した。今回の提出本文は追加ツールを含む3ツール構成の再実行結果に基づく。
+- 詳しい操作手順は [RUN_ADK.md](RUN_ADK.md)。
+- 添付の宿題資料の `adk run` 手順を優先し、`adk web` の画面比較は行っていない。
+- コード・文章作成・ブラウザでの実行・ログ照合にはAIを利用した。記載した結果は保存された実回答とログに基づく。APIキーはコードや提出文に記載していない。
 
 ### 出典
 
 1. 配布資料「第3回宿題資料.pdf」、発展(a)・提出の説明（発行日記載なし）。
-2. [講座の課題説明](https://github.com/SportsDS/lecture-ai-engineering-2026/blob/62b03bee1a52fb21bcbe52f7973c26558d0a3a97/lectures/03/problem.md)、2026-11-09確認。
-3. [講座の元エージェント](https://github.com/SportsDS/lecture-ai-engineering-2026/blob/62b03bee1a52fb21bcbe52f7973c26558d0a3a97/app/agent.py)、2026-11-09確認。
-4. [Google ADK Python Quickstart](https://adk.dev/get-started/python/)、公開日記載なし、2026-11-09確認。`root_agent`・`instruction`・`tools`・`adk run` の使い方を参照。
-5. ローカルにインストールした `google-adk==2.14.0` の `adk run --help` と実際の登録結果。
+2. [第3回の演習・宿題要件](problem.md)。
+3. [第1回の解答](../01/answer.md)。宿題の3レベルについての従来の観察を参照し、今回は同じ質問を再実行した。
+4. [演習の実行ログ](results/exercise_20261109T053810574600Z/exercise.md)、[発展比較の生データ](results/20261109T054020489646Z/comparison.json)、2026-11-09実行。
+5. [Google ADK Python Quickstart](https://adk.dev/get-started/python/)、2026-11-09確認。エージェント構築・関数ツール登録・CLI実行を参照。
 
 <!-- adk-comparison:start -->
 

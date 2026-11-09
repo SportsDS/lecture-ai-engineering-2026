@@ -1,47 +1,40 @@
-# 第3回 発展(a) の比較を仕上げる
+# 第3回の再現手順
 
-ADKの実装・API不要の検証は完了。実モデルの回答比較が残っている。
-`GEMINI_API_KEY` が設定されている、このリポジトリのCodespacesで実行する。キーをチャットやコードに書かない。
+提出本文は [answer.md](answer.md)。演習の追加ツールは `app/tools.py` の `make_quiz` で、Pydantic AI版・ADK版に同じ3関数を登録している。
 
-## 1. ブランチを開く
+## 演習：素のLLMとエージェント、trace、小テスト
+
+APIキー設定済みのCodespacesで、リポジトリ直下から実行する。
 
 ```bash
-git fetch origin
-git switch lec03-adk
+uv run --with google-adk==2.14.0 python scripts/run_lecture03_exercise.py
 ```
 
-すでに同じブランチで作業している場合は、未コミット変更を確認し、必要に応じて `git pull --ff-only` する。
+第1回の既定質問（宿題の3レベル）と第3回資料の開始タグの質問について、素のLLMとエージェントを同じ質問で比較する。さらにLoRA・QLoRAと確認問題の質問を `--trace` 付きで実行する。各実行は新規プロセスで、質問間は15秒空ける。
 
-## 2. 比較する
+結果は `lectures/03/results/exercise_実行日時/` の `exercise.json`・`exercise.md`・各標準出力/標準エラーログに保存する。pytestと3ツールの共有確認も記録する。APIエラー時は成功したとの記録を作らず停止する。
 
-リポジトリ直下で実行する。
+## 発展(a)：Google ADKとの比較
 
 ```bash
 uv run --with google-adk==2.14.0 python scripts/compare_adk.py
 ```
 
-4問×2方式を順に実行する。各エージェントは1問の処理で複数回APIを呼ぶ場合がある。レート制限などで失敗したら、表示されたログを確認してから再実行する。未完了時には `answer.md` の結果欄を更新しない。
+用語・講義内容・未登録語・追加した小テストの5問を両方式で実行する。全問成功時にだけ `answer.md` の実回答欄を更新する。生ログは `lectures/03/results/実行日時/` に保存する。
 
-モデルが利用できない場合は、利用可能なモデルを `AIE_MODEL` に指定して同じコマンドを実行する。両方式に同じモデル設定が渡る。
+コードの書き方と同じ質問への回答を比較し、添付の課題資料に従って `adk run` を使う。`adk web` 画面の比較は行っていない。
 
-## 3. 実回答と提出文を確認してpushする
-
-`lectures/03/answer.md` 末尾に、実回答・ツール呼び出し・Pydantic AIのrequestsが追記される。
-rawログと比較し、用語集の参照・関連回の記載・未登録語への応答を確認する。必要なら「気づき・疑問」を自分の理解に合わせて編集する。
-
-```bash
-git add lectures/03/answer.md lectures/03/results/
-git commit -m "第3回: ADKとPydantic AIの実モデル比較結果を記録"
-git push origin lec03-adk
-```
-
-GitHubのドラフトPRを開き、実行結果を確認してから「Ready for review」に切り替える。自分のforkの `main` 向けのPRが講座の提出形式で、上流リポジトリへのPRやmainへのマージは必要ない。
-
-## 任意：APIを使わず再検証
+## API不要の検証
 
 ```bash
 uv run pytest -q
 uv run --with google-adk==2.14.0 python scripts/verify_adk_offline.py
 ```
 
-このチェックは実モデルの回答比較の代用にはならない。
+TestModelは接続・登録情報の確認に用い、ダミーの回答を実モデル比較の結果として扱わない。
+
+## 変更後の保存
+
+実回答と考察を確認し、必要な変更だけをcommit・pushする。自分のfork内の `lec03-adk` → `main` のPRが提出先である。mainへのマージは行わない。
+
+APIキーは環境変数 `GEMINI_API_KEY` から読み、コード・ログ・コミットに記録しない。
