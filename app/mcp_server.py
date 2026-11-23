@@ -27,7 +27,10 @@ server = MCPServer(
 server.tool()(tools.search_glossary)
 
 # TODO(第5回 演習): tools.get_lecture_summary も公開しよう（上の1行と同じ書き方）
-# 第3回で make_quiz を作った人は、それも公開できる
+server.tool()(tools.get_lecture_summary)
+
+# 第3回で作った復習問題ツールも、MCP 越しに公開する
+server.tool()(tools.make_quiz)
 
 
 def main() -> None:

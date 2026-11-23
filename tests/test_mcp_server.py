@@ -12,6 +12,7 @@ from pydantic_ai.models.test import TestModel
 from app.agent import MCP_CONFIG, build_mcp_agent
 
 GLOSSARY_TOOL = "glossary_search_glossary"  # 設定ファイルのサーバー名 "glossary" が前に付く
+QUIZ_TOOL = "glossary_make_quiz"
 
 
 def _glossary_only_config(tmp_path):
@@ -27,6 +28,19 @@ def _glossary_only_config(tmp_path):
 
 def _parts(result, kind):
     return [p for m in result.all_messages() for p in m.parts if isinstance(p, kind)]
+
+
+class _QuizTestModel(TestModel):
+    """TestModel that supplies a predictable lecture number to the MCP tool."""
+
+    def __init__(self, lecture: int):
+        super().__init__(call_tools=[QUIZ_TOOL])
+        self.lecture = lecture
+
+    def gen_tool_args(self, tool_def):
+        if tool_def.name == QUIZ_TOOL:
+            return {"lecture": self.lecture}
+        return super().gen_tool_args(tool_def)
 
 
 def test_glossary_server_exposes_search_tool(tmp_path):
@@ -46,3 +60,31 @@ def test_glossary_result_comes_back_through_mcp(tmp_path):
     assert returns and returns[0].tool_name == GLOSSARY_TOOL
     assert str(returns[0].content).strip()  # 検索結果（または「見つかりませんでした」）が戻っている
     assert result.output
+
+
+def test_make_quiz_is_exposed_and_returns_a_quiz_through_mcp(tmp_path):
+    model = _QuizTestModel(lecture=2)
+    result = build_mcp_agent(_glossary_only_config(tmp_path)).run_sync(
+        "第2回の確認問題を出して", model=model
+    )
+
+    calls = _parts(result, ToolCallPart)
+    returns = _parts(result, ToolReturnPart)
+    assert [part.tool_name for part in calls] == [QUIZ_TOOL]
+    assert calls[0].args == {"lecture": 2}
+    assert returns and returns[0].tool_name == QUIZ_TOOL
+    quiz = json.loads(str(returns[0].content))
+    assert quiz["lecture"] == 2
+    assert quiz["question"]
+    assert quiz["answer"]
+
+
+def test_make_quiz_validation_message_returns_through_mcp(tmp_path):
+    model = _QuizTestModel(lecture=0)
+    result = build_mcp_agent(_glossary_only_config(tmp_path)).run_sync(
+        "第0回の確認問題を出して", model=model
+    )
+
+    returns = _parts(result, ToolReturnPart)
+    assert returns and returns[0].tool_name == QUIZ_TOOL
+    assert "1以上の整数" in str(returns[0].content)
